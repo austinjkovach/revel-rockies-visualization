@@ -1,17 +1,18 @@
 .runner-card {
   width: 500px;
-  background: pink;
-  border-radius: 7px;
   height: 80px;
 
   margin-top: 8px;
   margin-bottom: 8px;
-
   padding: 10px;
+  border-radius: 7px;
 
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  background: #ff4d00;
+  color: white;
+
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
 .card-container {
@@ -19,6 +20,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  margin-top: 50px;
 }
 
 .runner-name,
@@ -26,4 +29,19 @@
 .runner-bib {
   margin: 0;
   text-align: initial;
+}
+
+.button-container {
+  position: fixed;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50px;
+
+  z-index: 1;
+  background: white;
+}
+
+.button-container button {
+
 }

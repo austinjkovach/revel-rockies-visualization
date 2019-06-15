@@ -6,25 +6,26 @@ class RunnerCard extends React.Component {
   }
   render() {
     const {
+      link,
       first_name,
       last_name,
       bib_number,
       sex,
       age,
       data,
-      activeLabel
+      activeCheckpoint
     } = this.props;
     return (
       <div className="runner-card">
-        <h3 className="runner-name">
+        <a href={link} target="_blank" rel="noopener noreferrer"><h3 className="runner-name">
           {first_name} {last_name}
-        </h3>
+        </h3></a>
         <h5 className="runner-place">
           {data.finish.chip_time_place_overall}
         </h5>
         <h6 className="runner-bib">{bib_number}</h6>
         <h6 className="runner-place">
-          active place: {data[activeLabel]["chip_time_place_overall"]}
+          active place: {data[activeCheckpoint]["chip_time_place_overall"]}
         </h6>
       </div>
     );
