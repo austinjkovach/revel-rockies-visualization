@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link, Element, animateScroll as scroll, scroller } from "react-scroll";
 class RunnerCard extends React.Component {
   constructor(props) {
     super(props);
@@ -7,6 +7,7 @@ class RunnerCard extends React.Component {
   render() {
     const {
       link,
+      scrollName,
       first_name,
       last_name,
       bib_number,
@@ -16,7 +17,7 @@ class RunnerCard extends React.Component {
       activeCheckpoint
     } = this.props;
     return (
-      <div className="runner-card">
+      <div className="runner-card" name={scrollName}>
         <a href={link} target="_blank" rel="noopener noreferrer">
           <h3 className="runner-name">
             {first_name} {last_name}

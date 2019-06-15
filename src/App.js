@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import FlipMove from "react-flip-move";
+import * as Scroll from "react-scroll";
+import { Link, Element, animateScroll as scroll, scroller } from "react-scroll";
 
 import revel_data from "./data/revel-marathon.json";
 
@@ -39,22 +41,30 @@ class App extends React.Component {
       activeCheckpointIndex: newActiveCheckpointIndex
     });
   };
-
+  scrollTo = name => {
+    scroller.scrollTo(name, {
+      duration: 1500,
+      smooth: true,
+      offset: 50 // Scrolls to element + 50 pixels down the page
+    });
+  };
   render() {
     return (
       <div className="App">
-        <Stepper
+        {/* <Stepper
           activeCheckpoint={this.state.activeCheckpoint}
           activeCheckpointIndex={this.state.activeCheckpointIndex}
           checkpointLabels={checkpointLabels}
           handleClick={this.setActiveCheckpoint}
-        />
+        /> */}
+        <Link onClick={() => this.scrollTo("1295")}>Scroll</Link>
         <FlipMove className="card-container">
           {this.state.runners.map(runner => (
             <RunnerCard
               {...runner}
               key={runner.bib_number}
               activeCheckpoint={this.state.activeCheckpoint}
+              scrollName={`${runner.bib_number}`}
             />
           ))}
         </FlipMove>
