@@ -23,6 +23,12 @@ a:visited {
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
+.runner-card.follow-card {
+  height: 80px;
+  width: 300px;
+  margin: 0;
+}
+
 .card-container {
   display: flex;
   flex-direction: column;
@@ -105,4 +111,13 @@ a:visited {
 
 .stepper-btn.active .divider {
   background: green;
+}
+
+.follow-container {
+  position: fixed;
+  top: 300px;
+}
+
+.spacer {
+  height: 100vh;
 }

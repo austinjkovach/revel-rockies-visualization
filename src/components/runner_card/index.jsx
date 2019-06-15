@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, Element, animateScroll as scroll, scroller } from "react-scroll";
 class RunnerCard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,8 @@ class RunnerCard extends React.Component {
       sex,
       age,
       data,
-      activeCheckpoint
+      activeCheckpoint,
+      setFollow
     } = this.props;
     return (
       <div className="runner-card" name={scrollName}>
@@ -28,6 +28,7 @@ class RunnerCard extends React.Component {
         <h6 className="runner-place">
           active place: {data[activeCheckpoint]["chip_time_place_overall"]}
         </h6>
+        <button onClick={() => setFollow(this.props)}>Follow</button>
       </div>
     );
   }
