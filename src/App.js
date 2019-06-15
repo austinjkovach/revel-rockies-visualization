@@ -17,22 +17,27 @@ class App extends React.Component {
       runners: revel_data.data.slice(0, 10),
       // runners: revel_data.data.filter(runner => runner["data"]["start"] !== undefined),
       checkpointLabels: checkpointLabels,
-      activeCheckpoint: checkpointLabels[0]
+      activeCheckpoint: checkpointLabels[0],
+      activeCheckpointIndex: 0
     };
   }
 
   setActiveCheckpoint = label => {
     const { runners } = this.state;
-    const chipPlace = (runner) => parseInt(runner["data"][label]["chip_time_place_overall"])
+    const chipPlace = runner =>
+      parseInt(runner["data"][label]["chip_time_place_overall"]);
 
     let newRunners = runners.sort((a, b) =>
-      chipPlace(a) <
-      chipPlace(b)
-        ? -1
-        : 1
+      chipPlace(a) < chipPlace(b) ? -1 : 1
     );
 
-    this.setState({ activeCheckpoint: label, runners: newRunners });
+    const newActiveCheckpointIndex = this.state.checkpointLabels.indexOf(label);
+
+    this.setState({
+      activeCheckpoint: label,
+      runners: newRunners,
+      activeCheckpointIndex: newActiveCheckpointIndex
+    });
   };
 
   render() {
@@ -40,6 +45,7 @@ class App extends React.Component {
       <div className="App">
         <Stepper
           activeCheckpoint={this.state.activeCheckpoint}
+          activeCheckpointIndex={this.state.activeCheckpointIndex}
           checkpointLabels={checkpointLabels}
           handleClick={this.setActiveCheckpoint}
         />
