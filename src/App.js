@@ -6,7 +6,7 @@ import revel_data from "./data/revel-marathon.json";
 
 import RunnerCard from "./components/runner_card/index";
 
-const checkpointLabels = Object.keys(revel_data.data[0].data[0]);
+const checkpointLabels = Object.keys(revel_data.data[0].data);
 
 class App extends React.Component {
   constructor(props) {
@@ -44,8 +44,8 @@ class App extends React.Component {
     console.log("runners", runners);
     console.log("label", label);
     let newRunners = runners.sort((a, b) =>
-      parseInt(a["data"][0][label]["chip_time_place_overall"]) <
-      parseInt(b["data"][0][label]["chip_time_place_overall"])
+      parseInt(a["data"][label]["chip_time_place_overall"]) <
+      parseInt(b["data"][label]["chip_time_place_overall"])
         ? -1
         : 1
     );
