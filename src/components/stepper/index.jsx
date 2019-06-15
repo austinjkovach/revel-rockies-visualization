@@ -8,18 +8,18 @@ const Stepper = ({
   handleClick
 }) => (
   <div className="stepper">
-    <div className="line-through" />
     <div className="stepper-btn-container">
-      {checkpointLabels &&
-        checkpointLabels.map((label, index) => (
-          <div className={"stepper-btn"}>
-            <button
-              className={activeCheckpointIndex >= index ? "active" : ""}
-              onClick={() => handleClick(label)}
-            />
-            <label>{label}</label>
-          </div>
-        ))}
+      {checkpointLabels.map((label, index) => (
+        <div
+          className={`stepper-btn${
+            activeCheckpointIndex >= index ? " active" : ""
+          }`}
+        >
+          <button onClick={() => handleClick(label)} />
+          <label>{label}</label>
+          <div className="divider" />
+        </div>
+      ))}
     </div>
   </div>
 );

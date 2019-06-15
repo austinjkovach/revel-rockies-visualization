@@ -17,12 +17,12 @@ class RunnerCard extends React.Component {
     } = this.props;
     return (
       <div className="runner-card">
-        <a href={link} target="_blank" rel="noopener noreferrer"><h3 className="runner-name">
-          {first_name} {last_name}
-        </h3></a>
-        <h5 className="runner-place">
-          {data.finish.chip_time_place_overall}
-        </h5>
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          <h3 className="runner-name">
+            {first_name} {last_name}
+          </h3>
+        </a>
+        <h5 className="runner-place">{data.finish.chip_time_place_overall}</h5>
         <h6 className="runner-bib">{bib_number}</h6>
         <h6 className="runner-place">
           active place: {data[activeCheckpoint]["chip_time_place_overall"]}
