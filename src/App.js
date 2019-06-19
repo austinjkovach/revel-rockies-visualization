@@ -176,12 +176,12 @@ class App extends React.Component {
         </div>
         <div className="filter-container filter-age">
           <div className="input-wrapper">
-            <label>{"ALL"}</label>
+            <label>{"ALL AGES"}</label>
             <input
               type="radio"
               value={"ALL"}
               checked={this.state.ageRadioOption === "ALL"}
-              onChange={this.handleAgeRadioChange}
+              onChange={() => this.handleAgeRadioChange("ALL")}
             />
           </div>
           {ageRangesMax.map(range => (
@@ -198,12 +198,12 @@ class App extends React.Component {
             </div>
           ))}
         </div>
-        <FlipMove
+        {/* <FlipMove
           className="card-container"
           staggerDelayBy={30}
           onFinishAll={() => this.scrollToRunner(following)}
-        >
-          {/* <div className="card-container"> */}
+        > */}
+        <div className="card-container">
           {runners.map((runner, index) => (
             <RunnerCard
               {...runner}
@@ -214,8 +214,8 @@ class App extends React.Component {
               setFollow={this.setFollow}
             />
           ))}
-          {/* </div> */}
-        </FlipMove>
+        </div>
+        {/* </FlipMove> */}
         {following && (
           <FollowCard
             {...following}

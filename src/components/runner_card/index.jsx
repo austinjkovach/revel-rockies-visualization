@@ -1,5 +1,6 @@
 import React from "react";
 class RunnerCard extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
   }
@@ -33,16 +34,19 @@ class RunnerCard extends React.Component {
             <span className="runner-bib">#{bib_number}</span>
           </h3>
           <h4 className="runner-time">
-            {data[activeCheckpoint]["course_time"]}
+            Course Time: {data[activeCheckpoint]["course_time"]}
           </h4>
           <h4 className="runner-pace">
-            {data[activeCheckpoint]["interval_pace"]}
+            Pace: {data[activeCheckpoint]["interval_pace"]}
           </h4>
           <h6 className="runner-overall">
             Overall: {data[activeCheckpoint]["chip_time_place_overall"]}
           </h6>
         </div>
-        <div className="flex flex-col flex-1" />
+        <div className="flex flex-col flex-1">
+          <span>{age}</span>
+          <span>{sex}</span>
+        </div>
         {/* <h6 className="runner-place">
           active place: {data[activeCheckpoint]["chip_time_place_overall"]}
         </h6> */}
