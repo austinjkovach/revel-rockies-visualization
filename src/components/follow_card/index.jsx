@@ -13,10 +13,9 @@ class FollowCard extends React.Component {
       bib_number,
       sex,
       age,
-      data,
-      activeCheckpoint,
-      setFollow
+      data
     } = this.props;
+    const { activeCheckpoint, handleScrollTo } = this.props;
     return (
       <div className="follow-container">
         <div className="runner-card follow-card">
@@ -32,6 +31,7 @@ class FollowCard extends React.Component {
           <h6 className="runner-place">
             active place: {data[activeCheckpoint]["chip_time_place_overall"]}
           </h6>
+          <button onClick={handleScrollTo}>Jump to {data.first_name}</button>
         </div>
       </div>
     );

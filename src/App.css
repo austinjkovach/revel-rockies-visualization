@@ -7,6 +7,9 @@ a:visited {
 }
 
 .runner-card {
+  display: flex;
+  flex-direction: row;
+
   width: 500px;
   height: 80px;
 
@@ -37,11 +40,45 @@ a:visited {
   margin-top: 100px;
 }
 
+.flex {
+  display: flex;
+  padding-right: 15px;
+}
+
+.flex-1 {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.follow-btn {
+  width: 100%;
+}
+
 .runner-name,
 .runner-place,
+.runner-overall,
+.runner-time,
+.runner-pace,
 .runner-bib {
   margin: 0;
   text-align: initial;
+}
+
+.runner-place {
+  font-size: 50px;
+}
+
+.runner-bib {
+  margin-left: 10px;
 }
 
 .runner-name {
@@ -115,9 +152,41 @@ a:visited {
 
 .follow-container {
   position: fixed;
-  top: 300px;
+  top: 400px;
 }
 
 .spacer {
   height: 100vh;
+}
+
+.filter-container {
+  background: #ff4d00;
+  position: fixed;
+  right: 25px;
+
+  width: 300px;
+  border-radius: 7px;
+  padding: 10px;
+  z-index: 2;
+
+  color: white;
+}
+
+.filter-container .input-wrapper {
+  width: 100%;
+  height: 30px;
+}
+
+.filter-container input {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+
+.filter-sex {
+  top: 150px;
+}
+
+.filter-age {
+  top: 300px;
 }

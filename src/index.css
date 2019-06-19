@@ -7,8 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-image: url('./assets/antony-sklivagkos-658428-unsplash.jpg'); */
-  background-image: url("./assets/marvin-meyer-1637694-unsplash.jpg");
-  background-size: cover;
+  /* background-image: url("./assets/marvin-meyer-1637694-unsplash.jpg"); */
+  background: lightblue;
+  /* background-size: cover; */
 
   min-height: 100vh;
 }
