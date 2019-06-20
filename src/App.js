@@ -9,9 +9,14 @@ import Stepper from "./components/stepper/index";
 
 import revel_data from "./data/revel-marathon.json";
 
-const runner_data = revel_data.data.filter(
-  runner => runner["data"]["start"] !== undefined
-);
+const chipPlace = runner =>
+  runner["data"]["finish"]["chip_time_place_overall"] === ""
+    ? 9999
+    : parseInt(runner["data"]["finish"]["chip_time_place_overall"]);
+
+const runner_data = revel_data.data
+  .filter(runner => runner["data"]["start"] !== undefined)
+  .sort((a, b) => (chipPlace(a) < chipPlace(b) ? -1 : 1));
 
 const checkpointLabels = Object.keys(revel_data.data[0].data);
 
@@ -52,7 +57,9 @@ class App extends React.Component {
   setActiveCheckpoint = label => {
     const { runners, following } = this.state;
     const chipPlace = runner =>
-      parseInt(runner["data"][label]["chip_time_place_overall"]);
+      runner["data"][label]["chip_time_place_overall"] === ""
+        ? 9999
+        : parseInt(runner["data"][label]["chip_time_place_overall"]);
 
     let newRunners = runners.sort((a, b) =>
       chipPlace(a) < chipPlace(b) ? -1 : 1
@@ -71,7 +78,6 @@ class App extends React.Component {
   };
 
   scrollToRunner = runner => {
-    console.log("SCROLL TO RUNNER", runner);
     if (!runner) {
       return;
     }
@@ -135,7 +141,8 @@ class App extends React.Component {
       activeCheckpoint,
       activeCheckpointIndex,
       following,
-      runners
+      runners,
+      allRunners
     } = this.state;
     return (
       <div className="App">
@@ -212,6 +219,12 @@ class App extends React.Component {
               activeCheckpoint={this.state.activeCheckpoint}
               scrollName={`${runner.bib_number}`}
               setFollow={this.setFollow}
+              currentPlacement={
+                runners.findIndex(r => r.bib_number === runner.bib_number) + 1
+              }
+              overallPlacement={
+                runner["data"][activeCheckpoint]["chip_time_place_overall"]
+              }
             />
           ))}
         </div>
@@ -220,9 +233,15 @@ class App extends React.Component {
           <FollowCard
             {...following}
             key={following.bib_number}
-            activeCheckpoint={this.state.activeCheckpoint}
+            activeCheckpoint={activeCheckpoint}
             handleScrollTo={() => this.scrollToRunner(following)}
             setFollow={this.setFollow}
+            currentPlacement={
+              runners.findIndex(r => r.bib_number === following.bib_number) + 1
+            }
+            overallPlacement={
+              following["data"][activeCheckpoint]["chip_time_place_overall"]
+            }
           />
         )}
         <div className="spacer" />

@@ -40,16 +40,16 @@ class RunnerCard extends React.Component {
             Pace: {data[activeCheckpoint]["interval_pace"]}
           </h4>
           <h6 className="runner-overall">
-            Overall: {data[activeCheckpoint]["chip_time_place_overall"]}
+            Overall:{" "}
+            {activeCheckpoint === "start"
+              ? "N/A"
+              : data[activeCheckpoint]["chip_time_place_overall"]}
           </h6>
         </div>
         <div className="flex flex-col flex-1">
           <span>{age}</span>
           <span>{sex}</span>
         </div>
-        {/* <h6 className="runner-place">
-          active place: {data[activeCheckpoint]["chip_time_place_overall"]}
-        </h6> */}
       </div>
     );
   }

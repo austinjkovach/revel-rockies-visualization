@@ -10,7 +10,7 @@ a:visited {
   display: flex;
   flex-direction: row;
 
-  width: 500px;
+  width: 400px;
   height: 80px;
 
   margin-top: 8px;
@@ -28,7 +28,7 @@ a:visited {
 
 .runner-card.follow-card {
   height: 80px;
-  width: 300px;
+  width: 400px;
   margin: 0;
 }
 

@@ -13,20 +13,16 @@ class FollowCard extends React.Component {
       bib_number,
       sex,
       age,
-      data
+      data,
+      currentPlacement,
+      overallPlacement
     } = this.props;
     const { activeCheckpoint, handleScrollTo } = this.props;
     return (
       <div className="follow-container">
         <div className="runner-card follow-card">
           <div className="flex flex-col flex-1">
-            <h1 className="runner-place">{1}</h1>
-            {/* <button
-              className="follow-btn"
-              onClick={() => setFollow(this.props)}
-            >
-              Follow
-            </button> */}
+            <h1 className="runner-place">{currentPlacement}</h1>
             <button onClick={handleScrollTo}>Jump</button>
           </div>
           <div className="flex flex-col flex-4">
@@ -43,13 +39,13 @@ class FollowCard extends React.Component {
               Pace: {data[activeCheckpoint]["interval_pace"]}
             </h4>
             <h6 className="runner-overall">
-              Overall: {data[activeCheckpoint]["chip_time_place_overall"]}
+              Overall: {activeCheckpoint === "start" ? "N/A" : overallPlacement}
             </h6>
           </div>
-          <div className="flex flex-col flex-1" />
-          {/* <h6 className="runner-place">
-            active place: {data[activeCheckpoint]["chip_time_place_overall"]}
-          </h6> */}
+          <div className="flex flex-col flex-1">
+            <span>{age}</span>
+            <span>{sex}</span>
+          </div>
         </div>
       </div>
     );
