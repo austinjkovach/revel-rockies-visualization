@@ -205,12 +205,12 @@ class App extends React.Component {
             </div>
           ))}
         </div>
-        {/* <FlipMove
+        <FlipMove
           className="card-container"
           staggerDelayBy={30}
           onFinishAll={() => this.scrollToRunner(following)}
-        > */}
-        <div className="card-container">
+          disableAllAnimations={runners.length > 100}
+        >
           {runners.map((runner, index) => (
             <RunnerCard
               {...runner}
@@ -227,8 +227,7 @@ class App extends React.Component {
               }
             />
           ))}
-        </div>
-        {/* </FlipMove> */}
+        </FlipMove>
         {following && (
           <FollowCard
             {...following}
