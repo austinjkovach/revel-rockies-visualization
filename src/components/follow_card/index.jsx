@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Element, animateScroll as scroll, scroller } from "react-scroll";
+import { Element, animateScroll as scroll, scroller } from "react-scroll";
 class FollowCard extends React.Component {
   constructor(props) {
     super(props);

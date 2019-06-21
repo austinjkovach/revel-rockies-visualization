@@ -4,7 +4,6 @@ import FlipMove from "react-flip-move";
 import { scroller } from "react-scroll";
 
 import RunnerCard from "./components/runner_card/index";
-import FollowCard from "./components/follow_card/index";
 import Stepper from "./components/stepper/index";
 import AgeFilter from "./components/age_filter/index";
 import SexFilter from "./components/sex_filter/index";
@@ -33,7 +32,7 @@ class App extends React.Component {
       checkpointLabels: checkpointLabels,
       activeCheckpoint: checkpointLabels[0],
       activeCheckpointIndex: 0,
-      following: null,
+      following: [],
       sexRadioOption: "ALL",
       ageRadioOption: "ALL"
     };
@@ -50,15 +49,20 @@ class App extends React.Component {
       chipPlace(a) < chipPlace(b) ? -1 : 1
     );
 
+    let newFollowing = following.sort((a, b) =>
+      chipPlace(a) < chipPlace(b) ? -1 : 1
+    );
+
     const newActiveCheckpointIndex = this.state.checkpointLabels.indexOf(label);
 
     this.setState(
       {
         activeCheckpoint: label,
         runners: newRunners,
+        following: newFollowing,
         activeCheckpointIndex: newActiveCheckpointIndex
       },
-      () => this.scrollToRunner(following)
+      () => this.scrollToRunner(following[0])
     );
   };
 
@@ -73,8 +77,19 @@ class App extends React.Component {
     });
   };
 
-  setFollow = runner => {
-    this.setState({ following: runner });
+  addFollow = runner => {
+    const { activeCheckpoint, following } = this.state;
+
+    const chipPlace = runner =>
+      runner["data"][activeCheckpoint]["chip_time_place_overall"] === ""
+        ? 9999
+        : parseInt(runner["data"][activeCheckpoint]["chip_time_place_overall"]);
+
+    let newFollowing = [...following, runner].sort((a, b) =>
+      chipPlace(a) < chipPlace(b) ? -1 : 1
+    );
+
+    this.setState({ following: newFollowing });
   };
 
   filterSex = (runnersList, sortValue) =>
@@ -148,7 +163,7 @@ class App extends React.Component {
         <FlipMove
           className="card-container"
           staggerDelayBy={30}
-          onFinishAll={() => this.scrollToRunner(following)}
+          onFinishAll={() => this.scrollToRunner(following[0])}
           disableAllAnimations={runners.length > 100}
         >
           {runners.map((runner, index) => (
@@ -158,7 +173,7 @@ class App extends React.Component {
               key={runner.bib_number}
               activeCheckpoint={this.state.activeCheckpoint}
               scrollName={`${runner.bib_number}`}
-              setFollow={this.setFollow}
+              handleButton={this.addFollow}
               currentPlacement={
                 runners.findIndex(r => r.bib_number === runner.bib_number) + 1
               }
@@ -168,21 +183,30 @@ class App extends React.Component {
             />
           ))}
         </FlipMove>
-        {following && (
-          <FollowCard
-            {...following}
-            key={following.bib_number}
-            activeCheckpoint={activeCheckpoint}
-            handleScrollTo={() => this.scrollToRunner(following)}
-            setFollow={this.setFollow}
-            currentPlacement={
-              runners.findIndex(r => r.bib_number === following.bib_number) + 1
-            }
-            overallPlacement={
-              following["data"][activeCheckpoint]["chip_time_place_overall"]
-            }
-          />
-        )}
+        <div className="follow-container">
+          <FlipMove
+            staggerDelayBy={30}
+            disableAllAnimations={runners.length > 100}
+          >
+            {following.map((follower, index) => (
+              <RunnerCard
+                {...follower}
+                currentPlacement={index + 1}
+                key={`follow${follower.bib_number}`}
+                activeCheckpoint={this.state.activeCheckpoint}
+                scrollName={`${follower.bib_number}`}
+                handleButton={this.removeFollow}
+                currentPlacement={
+                  runners.findIndex(r => r.bib_number === follower.bib_number) +
+                  1
+                }
+                overallPlacement={
+                  follower["data"][activeCheckpoint]["chip_time_place_overall"]
+                }
+              />
+            ))}
+          </FlipMove>
+        </div>
         <div className="spacer" />
       </div>
     );

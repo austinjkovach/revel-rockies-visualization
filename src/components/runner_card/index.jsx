@@ -15,14 +15,19 @@ class RunnerCard extends React.Component {
       age,
       data,
       activeCheckpoint,
-      setFollow,
+      handleButton,
       currentPlacement
     } = this.props;
     return (
       <div className="runner-card" name={scrollName}>
         <div className="flex flex-col flex-1">
-          <h1 className="runner-place">{currentPlacement}</h1>
-          <button className="follow-btn" onClick={() => setFollow(this.props)}>
+          <h1 className="runner-place">
+            {currentPlacement > 0 ? currentPlacement : "N/A"}
+          </h1>
+          <button
+            className="follow-btn"
+            onClick={() => handleButton(this.props)}
+          >
             Follow
           </button>
         </div>
