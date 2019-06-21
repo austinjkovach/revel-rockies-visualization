@@ -6,6 +6,8 @@ import { scroller } from "react-scroll";
 import RunnerCard from "./components/runner_card/index";
 import FollowCard from "./components/follow_card/index";
 import Stepper from "./components/stepper/index";
+import AgeFilter from "./components/age_filter/index";
+import SexFilter from "./components/sex_filter/index";
 
 import revel_data from "./data/revel-marathon.json";
 
@@ -19,23 +21,6 @@ const runner_data = revel_data.data
   .sort((a, b) => (chipPlace(a) < chipPlace(b) ? -1 : 1));
 
 const checkpointLabels = Object.keys(revel_data.data[0].data);
-
-const ageRangesMax = [
-  { min: 0, max: 18 },
-  { min: 19, max: 24 },
-  { min: 25, max: 29 },
-  { min: 30, max: 34 },
-  { min: 35, max: 39 },
-  { min: 40, max: 44 },
-  { min: 45, max: 49 },
-  { min: 50, max: 54 },
-  { min: 55, max: 59 },
-  { min: 60, max: 64 },
-  { min: 65, max: 69 },
-  { min: 70, max: 74 },
-  { min: 75, max: 79 },
-  { min: 80, max: 120 }
-];
 
 class App extends React.Component {
   constructor(props) {
@@ -152,59 +137,14 @@ class App extends React.Component {
           checkpointLabels={checkpointLabels}
           handleClick={this.setActiveCheckpoint}
         />
-        <div className="filter-container filter-sex">
-          <div className="input-wrapper">
-            <label>All</label>
-            <input
-              type="radio"
-              value="ALL"
-              checked={this.state.sexRadioOption === "ALL"}
-              onChange={this.handleSexRadioChange}
-            />
-          </div>
-          <div className="input-wrapper">
-            <label>Male</label>
-            <input
-              type="radio"
-              value="M"
-              checked={this.state.sexRadioOption === "M"}
-              onChange={this.handleSexRadioChange}
-            />
-          </div>
-          <div className="input-wrapper">
-            <label>Female</label>
-            <input
-              type="radio"
-              value="F"
-              checked={this.state.sexRadioOption === "F"}
-              onChange={this.handleSexRadioChange}
-            />
-          </div>
-        </div>
-        <div className="filter-container filter-age">
-          <div className="input-wrapper">
-            <label>{"ALL AGES"}</label>
-            <input
-              type="radio"
-              value={"ALL"}
-              checked={this.state.ageRadioOption === "ALL"}
-              onChange={() => this.handleAgeRadioChange("ALL")}
-            />
-          </div>
-          {ageRangesMax.map(range => (
-            <div key={range.max} className="input-wrapper">
-              <label>
-                {range.min}-{range.max}
-              </label>
-              <input
-                type="radio"
-                value={range}
-                checked={this.state.ageRadioOption === range}
-                onChange={() => this.handleAgeRadioChange(range)}
-              />
-            </div>
-          ))}
-        </div>
+        <SexFilter
+          handleChange={this.handleSexRadioChange}
+          selectedOption={this.state.sexRadioOption}
+        />
+        <AgeFilter
+          handleChange={this.handleAgeRadioChange}
+          selectedOption={this.state.ageRadioOption}
+        />
         <FlipMove
           className="card-container"
           staggerDelayBy={30}
