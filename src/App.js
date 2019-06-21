@@ -92,6 +92,14 @@ class App extends React.Component {
     this.setState({ following: newFollowing });
   };
 
+  removeFollow = runner => {
+    const { following } = this.state;
+    const newFollowing = following.filter(
+      r => r.bib_number !== runner.bib_number
+    );
+    this.setState({ following: newFollowing });
+  };
+
   filterSex = (runnersList, sortValue) =>
     runnersList.filter(r => sortValue === "ALL" || r.sex === sortValue);
 
@@ -174,6 +182,8 @@ class App extends React.Component {
               activeCheckpoint={this.state.activeCheckpoint}
               scrollName={`${runner.bib_number}`}
               handleButton={this.addFollow}
+              handleUnfollow={null}
+              buttonLabel={"Follow"}
               currentPlacement={
                 runners.findIndex(r => r.bib_number === runner.bib_number) + 1
               }
@@ -192,10 +202,12 @@ class App extends React.Component {
               <RunnerCard
                 {...follower}
                 currentPlacement={index + 1}
-                key={`follow${follower.bib_number}`}
+                key={`${follower.bib_number}`}
                 activeCheckpoint={this.state.activeCheckpoint}
                 scrollName={`${follower.bib_number}`}
-                handleButton={this.removeFollow}
+                handleUnfollow={this.removeFollow}
+                handleButton={this.scrollToRunner}
+                buttonLabel={"Jump"}
                 currentPlacement={
                   runners.findIndex(r => r.bib_number === follower.bib_number) +
                   1

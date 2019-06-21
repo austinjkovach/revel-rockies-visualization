@@ -9,6 +9,7 @@ a:visited {
 .runner-card {
   display: flex;
   flex-direction: row;
+  position: relative;
 
   width: 400px;
   height: 80px;
@@ -189,4 +190,19 @@ a:visited {
 
 .filter-age {
   top: 260px;
+}
+
+.remove-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 23px;
+  height: 23px;
+  border-radius: 23px;
+  background: blue;
+  color: white;
+  cursor: pointer;
 }
