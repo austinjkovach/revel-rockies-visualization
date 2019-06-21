@@ -4,6 +4,7 @@ import FlipMove from "react-flip-move";
 import { scroller } from "react-scroll";
 
 import RunnerCard from "./components/runner_card/index";
+import FollowCard from "./components/follow_card/index";
 import Stepper from "./components/stepper/index";
 import AgeFilter from "./components/age_filter/index";
 import SexFilter from "./components/sex_filter/index";
@@ -182,8 +183,6 @@ class App extends React.Component {
               activeCheckpoint={this.state.activeCheckpoint}
               scrollName={`${runner.bib_number}`}
               handleButton={this.addFollow}
-              handleUnfollow={null}
-              buttonLabel={"Follow"}
               currentPlacement={
                 runners.findIndex(r => r.bib_number === runner.bib_number) + 1
               }
@@ -199,7 +198,7 @@ class App extends React.Component {
             disableAllAnimations={runners.length > 100}
           >
             {following.map((follower, index) => (
-              <RunnerCard
+              <FollowCard
                 {...follower}
                 currentPlacement={index + 1}
                 key={`${follower.bib_number}`}
@@ -207,7 +206,6 @@ class App extends React.Component {
                 scrollName={`${follower.bib_number}`}
                 handleUnfollow={this.removeFollow}
                 handleButton={this.scrollToRunner}
-                buttonLabel={"Jump"}
                 currentPlacement={
                   runners.findIndex(r => r.bib_number === follower.bib_number) +
                   1

@@ -16,20 +16,10 @@ class RunnerCard extends React.Component {
       data,
       activeCheckpoint,
       handleButton,
-      handleUnfollow,
-      currentPlacement,
-      buttonLabel
+      currentPlacement
     } = this.props;
     return (
       <div className="runner-card" name={scrollName}>
-        {handleUnfollow !== null && (
-          <button
-            className="remove-btn"
-            onClick={() => handleUnfollow(this.props)}
-          >
-            X
-          </button>
-        )}
         <div className="flex flex-col flex-1">
           <h1 className="runner-place">
             {currentPlacement > 0 ? currentPlacement : "N/A"}
@@ -38,7 +28,7 @@ class RunnerCard extends React.Component {
             className="follow-btn"
             onClick={() => handleButton(this.props)}
           >
-            {buttonLabel}
+            {"Follow"}
           </button>
         </div>
         <div className="flex flex-col flex-4">
