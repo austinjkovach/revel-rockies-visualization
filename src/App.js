@@ -28,8 +28,8 @@ class App extends React.Component {
 
     this.state = {
       allRunners: runner_data,
-      runners: runner_data.slice(0, 10),
-      // runners: runner_data,
+      // runners: runner_data.slice(0, 10),
+      runners: runner_data,
       checkpointLabels: checkpointLabels,
       activeCheckpoint: checkpointLabels[0],
       activeCheckpointIndex: 0,
